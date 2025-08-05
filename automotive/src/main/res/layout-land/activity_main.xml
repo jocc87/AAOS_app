@@ -1,0 +1,170 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:tools="http://schemas.android.com/tools"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+        <variable
+            name="sensorViewModel"
+            type="com.example.mvvmapp.viewmodel.SensorViewModel" />
+        <variable
+            name="automotiveViewModel"
+            type="com.example.mvvmapp.viewmodel.AutomotiveViewModel" />
+        <variable
+            name="locationViewModel"
+            type="com.example.mvvmapp.viewmodel.LocationViewModel" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:padding="16dp">
+
+        <com.github.anastr.speedviewlib.AwesomeSpeedometer
+            android:id="@+id/awesomeSpeedometer"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:sv_trembleDegree="0"
+            app:sv_maxSpeed="250"
+            app:sv_minSpeed="-50"
+            app:sv_indicatorWidth="35dp"
+            app:sv_speedometerColor="#E20074"
+            app:sv_trianglesColor="#E20074"
+            app:sv_indicatorColor="#E20074"
+            app:sv_textColor="#FFFFFF"
+            app:sv_speedTextSize="27dp"
+            app:sv_unitTextSize="25dp"
+            android:layout_marginEnd="16dp"/>
+
+        <!-- Battery Level ProgressBar -->
+        <ProgressBar
+            android:id="@+id/batteryProgressBar"
+            style="?android:attr/progressBarStyleHorizontal"
+            android:layout_width="0dp"
+            android:layout_height="50dp"
+            android:layout_marginTop="16dp"
+            android:max="100"
+            app:layout_constraintTop_toBottomOf="@id/awesomeSpeedometer"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent" />
+
+        <LinearLayout
+            android:id="@+id/dataLayout"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toEndOf="@id/awesomeSpeedometer"
+            app:layout_constraintEnd_toEndOf="parent">
+
+            <LinearLayout
+                android:id="@+id/gyroLayout"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/gyroscopeTitle"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Gyroscope: "
+                    android:textStyle="bold"
+                    android:textSize="25sp"
+                    android:layout_marginBottom="8dp"/>
+
+                <TextView
+                    android:id="@+id/textViewXg"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text='@{"X: " + String.valueOf(sensorViewModel.gyroscopeData.x)}'
+                    android:textSize="25sp" />
+
+                <TextView
+                    android:id="@+id/textViewYg"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text='@{"Y: " + String.valueOf(sensorViewModel.gyroscopeData.y)}'
+                    android:textSize="25sp" />
+
+                <TextView
+                    android:id="@+id/textViewZg"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text='@{"Z: " + String.valueOf(sensorViewModel.gyroscopeData.z)}'
+                    android:textSize="25sp" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/accLayout"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/accelerometerTitle"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Accelerometer: "
+                    android:textStyle="bold"
+                    android:textSize="25sp"/>
+
+                <TextView
+                    android:id="@+id/textViewX"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text='@{"X: " + String.valueOf(sensorViewModel.accelerometerData.x)}'
+                    android:textSize="25sp" />
+
+                <TextView
+                    android:id="@+id/textViewY"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text='@{"Y: " + String.valueOf(sensorViewModel.accelerometerData.y)}'
+                    android:textSize="25sp" />
+
+                <TextView
+                    android:id="@+id/textViewZ"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text='@{"Z: " + String.valueOf(sensorViewModel.accelerometerData.z)}'
+                    android:textSize="25sp" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/alocationLayout"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/locationTitle"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Location: "
+                    android:textSize="25sp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/locationLat"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text='@{"Latitude: " + String.valueOf(locationViewModel.locationData.latitude)}'
+                    android:textSize="25sp" />
+
+                <TextView
+                    android:id="@+id/locationLong"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text='@{"Longitude: " + String.valueOf(locationViewModel.locationData.longitude)}'
+                    android:textSize="25sp" />
+
+            </LinearLayout>
+       </LinearLayout>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>
